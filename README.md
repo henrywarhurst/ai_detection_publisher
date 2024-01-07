@@ -13,6 +13,7 @@ Publishes fake AI detections on a ros topic
 - Build the package:
 ```
 cd ~/dev_ws
+git clone <this repo>
 colcon build --packages-select ai_detection_publisher
 source ~/dev_ws/install/setup.bash
 ```
