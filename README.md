@@ -14,6 +14,7 @@ Publishes fake AI detections on a ros topic
 ```
 cd ~/dev_ws
 git clone <this repo>
+cd ..
 colcon build --packages-select ai_detection_publisher
 source ~/dev_ws/install/setup.bash
 ```
