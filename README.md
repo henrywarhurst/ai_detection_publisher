@@ -1,22 +1,48 @@
+# ai_detection_publisher
+
+Publishes fake AI detections on a ros topic
+
+## related info
+
 - Run ROSBridge, a WebSocket interface layer to ROS, and read the messages in C#
 - DotNet detection-manager prototype: https://github.com/henrywarhurst/detection-manager
 
-Set up ROS:
+## to run this code
 
+- Make a ros workspace if you don't already have one: `mkdir -p ~/dev_ws/src && cd ~/dev_ws/src`
+- Build the package:
+```
+cd ~/dev_ws
+colcon build --packages-select ai_detection_publisher
+source ~/dev_ws/install/setup.bash
+```
+
+- Run the package
+```
+ros2 run ai_detection_publisher publisher
+```
+
+## Prerequisite: set up ROS in docker
+
+```
 docker pull ros:foxy
 docker run -it --name my-ros-foxy-container ros:foxy -p 9090:9090
 apt-get update && apt-get install -y ros-foxy-rosbridge-server
 ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+```
 
-Setting up fake detections publisher:
+## Background: how was this repo created?
 
+```
 mkdir -p ~/dev_ws/src
 cd ~/dev_ws/src
 ros2 pkg create --build-type ament_python ai_detection_publisher --dependencies rclpy std_msgs
 cd ai_detection_publisher
+```
 
-make publisher.py:
+#### make publisher.py:
 
+```
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String  # Replace with your message type
@@ -47,9 +73,11 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+```
 
-make setup.py in the same dir
+#### make setup.py in the same dir
 
+```
 from setuptools import setup
 
 package_name = 'ai_detection_publisher'
@@ -76,12 +104,4 @@ setup(
         ],
     },
 )
-
-Build the package
-
-cd ~/dev_ws
-colcon build --packages-select ai_detection_publisher
-source ~/dev_ws/install/setup.bash
-
-Run the package
-ros2 run ai_detection_publisher publisher
+```
