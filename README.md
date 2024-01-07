@@ -26,7 +26,7 @@ ros2 run ai_detection_publisher publisher
 
 ```
 docker pull ros:foxy
-docker run -it --name my-ros-foxy-container ros:foxy -p 9090:9090
+ docker run -it --name my-ros-foxy-container -p 9090:9090 ros:foxy 
 apt-get update && apt-get install -y ros-foxy-rosbridge-server
 ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 ```
